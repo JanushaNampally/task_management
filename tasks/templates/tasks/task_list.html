@@ -1,0 +1,78 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h2>Optimized Task Schedule</h2>
+        <a href="{% url 'task-create' %}" class="btn-add">+ Add New Task</a>
+    </div>
+    
+    <div class="schedule-container">
+        {% if scheduled_tasks %}
+            <div class="task-timeline">
+                {% for scheduled_task in scheduled_tasks %}
+                <div class="scheduled-task">
+                    <div class="task-header">
+                        <h3>{{ scheduled_task.task.title }}</h3>
+                        <div class="task-score">Priority Score: {{ scheduled_task.score|floatformat:1 }}</div>
+                    </div>
+                    <div class="task-details">
+                        <p>{{ scheduled_task.task.description }}</p>
+                        <div class="task-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Deadline:</span> 
+                                <span class="meta-value">{{ scheduled_task.task.deadline|date:"M d, Y H:i" }}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Importance:</span> 
+                                <span class="meta-value">{{ scheduled_task.task.importance }}/10</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Est. Time:</span> 
+                                <span class="meta-value">{{ scheduled_task.task.estimated_hours }} hours</span>
+                            </div>
+                        </div>
+                        <div class="schedule-info">
+                            <div class="schedule-time">
+                                <span class="time-label">Suggested Start:</span> 
+                                <span class="time-value">{{ scheduled_task.start_time|date:"M d, Y H:i" }}</span>
+                            </div>
+                            <div class="schedule-time">
+                                <span class="time-label">Suggested End:</span> 
+                                <span class="time-value">{{ scheduled_task.end_time|date:"M d, Y H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-actions">
+                        <a href="{% url 'task-update' scheduled_task.task.id %}" class="btn-edit">Edit</a>
+                        <a href="{% url 'task-complete' scheduled_task.task.id %}" class="btn-complete">Complete</a>
+                        <a href="{% url 'task-delete' scheduled_task.task.id %}" class="btn-delete">Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>No pending tasks. Add a new task to get started!</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if completed_tasks %}
+    <div class="completed-tasks">
+        <h3>Completed Tasks</h3>
+        <div class="task-list">
+            {% for task in completed_tasks %}
+            <div class="task-item completed">
+                <span class="task-title">{{ task.title }}</span>
+                <div class="task-actions small">
+                    <a href="{% url 'task-reopen' task.id %}" class="btn-reopen">Reopen</a>
+                    <a href="{% url 'task-delete' task.id %}" class="btn-delete">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
