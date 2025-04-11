@@ -25,7 +25,7 @@ body {
     line-height: 1.6;
     background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd1dc' fill-opacity='0.3'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
-git init
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -53,7 +53,6 @@ header p {
     font-size: 1.1rem;
 }
 
-/* Dashboard Styles */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -84,7 +83,6 @@ header p {
     box-shadow: 0 4px 12px rgba(255, 133, 162, 0.5);
 }
 
-/* Task Timeline */
 .schedule-container {
     margin-bottom: 40px;
 }
@@ -230,7 +228,6 @@ header p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Completed Tasks */
 .completed-tasks {
     margin-top: 40px;
 }
@@ -288,7 +285,6 @@ header p {
     font-size: 0.8rem;
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 50px 0;
@@ -308,7 +304,6 @@ header p {
     color: var(--accent);
 }
 
-/* Form Styles */
 .form-container {
     max-width: 800px;
     margin: 0 auto;
@@ -355,8 +350,8 @@ input, textarea, select {
     border: 1px solid var(--border);
     border-radius: 12px;
     color: var(--text-primary);
+    font-family: inherit;
     font-size: 1rem;
-    transition: all 0.3s;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -365,124 +360,42 @@ input:focus, textarea:focus, select:focus {
     box-shadow: 0 0 0 3px rgba(255, 133, 162, 0.2);
 }
 
-.form-error {
-    color: var(--error);
-    font-size: 0.9rem;
-    margin-top: 5px;
+textarea {
+    resize: vertical;
+    min-height: 120px;
 }
 
-.form-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
-    justify-content: center;
-}
-
-.btn-primary, .btn-secondary {
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary {
+button[type="submit"] {
     background-color: var(--accent);
     color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(255, 133, 162, 0.3);
 }
 
-.btn-primary:hover {
+button[type="submit"]:hover {
     background-color: var(--accent-dark);
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(255, 133, 162, 0.4);
 }
 
-.btn-secondary {
-    background-color: var(--bg-input);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-    background-color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Delete Confirmation */
-.delete-confirmation {
-    text-align: center;
-}
-
-.delete-confirmation p {
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 2px dotted var(--border);
-    color: var(--text-secondary);
-}
-
-footer p:before,
-footer p:after {
-    content: "♥";
+.empty-state p:before,
+.empty-state p:after {
+    content: "♡";
     display: inline-block;
     margin: 0 10px;
     color: var(--accent);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .schedule-info {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .task-meta {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-/* Animations */
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.btn-add {
-    animation: heartbeat 2s infinite;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-dark);
-}
+.footer-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+  }
+  
